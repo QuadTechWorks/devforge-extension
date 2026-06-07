@@ -17,6 +17,10 @@ _Encode/decode utilities · snippet & token vaults · localhost port switcher ·
 
 <sub>Built by <strong><a href="https://quadtechworks.in">QuadTechWorks</a></strong></sub>
 
+<br/>
+
+<img src="docs/screenshot.png" alt="DevForge side panel — Base64 tool with auto-detect, find-in-output, and the QuadTechWorks theme" width="420" />
+
 </div>
 
 ---
