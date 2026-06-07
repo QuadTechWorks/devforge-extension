@@ -13,6 +13,7 @@ _Encode/decode utilities · snippet & token vaults · localhost port switcher ·
 ![No build step](https://img.shields.io/badge/build-none-success)
 ![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
 ![Version](https://img.shields.io/badge/version-1.3.0-7c3aed)
+![License](https://img.shields.io/badge/license-Apache--2.0-blue)
 
 <sub>Built by <strong><a href="https://quadtechworks.in">QuadTechWorks</a></strong></sub>
 
@@ -207,7 +208,11 @@ See [`CHANGELOG.md`](CHANGELOG.md) for release history.
 
 ## License
 
-No license file is included yet, so all rights are reserved by QuadTechWorks. If you intend to open-source this, add a `LICENSE` (e.g. MIT) and update this section.
+Licensed under the **Apache License 2.0** — see [`LICENSE`](LICENSE) and [`NOTICE`](NOTICE).
+
+You're free to use, modify, and distribute this software, including commercially, provided you retain the license and copyright notices and state significant changes. Apache 2.0 also includes an express patent grant. Contributions are accepted under the same license.
+
+Copyright © 2026 [QuadTechWorks](https://quadtechworks.in).
 
 ---
 
