@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    name: Syntax & manifest check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Syntax-check all JavaScript
+        run: |
+          set -e
+          fail=0
+          for f in $(git ls-files '*.js'); do
+            if node --check "$f"; then
+              echo "ok   $f"
+            else
+              echo "FAIL $f"; fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Validate manifest.json (strip // comments first)
+        run: |
+          node -e "
+            const fs = require('fs');
+            const raw = fs.readFileSync('manifest.json', 'utf8');
+            // Chrome tolerates //-comments in the manifest; strip them before JSON.parse.
+            const stripped = raw.replace(/^\s*\/\/.*$/gm, '');
+            const m = JSON.parse(stripped);
+            if (m.manifest_version !== 3) throw new Error('expected manifest_version 3');
+            if (!m.name || !m.version) throw new Error('missing name/version');
+            console.log('manifest.json OK — ' + m.name + ' v' + m.version);
+          "
+
+      - name: Verify every tool is registered in sidepanel.js
+        run: |
+          node -e "
+            const fs = require('fs');
+            const html = fs.readFileSync('sidepanel.html', 'utf8');
+            const js = fs.readFileSync('sidepanel.js', 'utf8');
+            const scripts = [...html.matchAll(/tools\/([\w.-]+)\.js/g)].map(m => m[1]);
+            let bad = 0;
+            for (const f of scripts) {
+              if (f.startsWith('_') || f === 'md5') continue; // shared utils, not tools
+              const src = fs.readFileSync('tools/' + f + '.js', 'utf8');
+              const g = (src.match(/window\.(Tool\w+)\s*=/) || [])[1];
+              if (!g) { console.error('no window.Tool* export in tools/' + f + '.js'); bad = 1; continue; }
+              if (!js.includes('window.' + g)) { console.error(g + ' not registered in sidepanel.js TOOLS'); bad = 1; }
+              else console.log('ok   ' + g);
+            }
+            process.exit(bad);
+          "
