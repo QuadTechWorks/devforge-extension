@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevForge — by QuadTechWorks</title>
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+  <div id="app">
+    <nav id="rail" aria-label="Tools">
+      <div id="rail-brand">
+        <img src="icons/icon32.png" class="brand-logo" alt="" />
+        <span class="brand-text">
+          <span class="brand-name">DevForge</span>
+          <span class="brand-by">by QuadTechWorks</span>
+        </span>
+      </div>
+      <button id="rail-toggle" title="Toggle sidebar" aria-label="Toggle sidebar">
+        <span class="toggle-icon">&#8249;</span>
+      </button>
+      <div id="rail-search-wrap">
+        <input id="rail-search" type="text" placeholder="Search tools… (/)" aria-label="Search tools" />
+      </div>
+      <ul id="tool-list" role="listbox" aria-label="Developer tools"></ul>
+      <button id="settings-btn" title="Settings" aria-label="Open settings">
+        <span class="settings-icon">⚙</span><span class="settings-label">Settings</span>
+      </button>
+      <div id="rail-powered" title="Created by QuadTechWorks">
+        <img src="icons/qtw-logo.png" class="powered-logo" alt="QuadTechWorks" />
+      </div>
+    </nav>
+    <main id="content" role="main"></main>
+
+    <button id="help-btn" title="Keyboard shortcuts (?)" aria-label="Keyboard shortcuts">?</button>
+  </div>
+
+  <!-- Settings panel (anchored overlay) -->
+  <div id="settings-panel" class="overlay" hidden>
+    <div class="settings-card" role="dialog" aria-label="Settings">
+      <div class="settings-header">
+        <span class="settings-title">Settings</span>
+        <button class="settings-close" id="settings-close" aria-label="Close settings">×</button>
+      </div>
+      <div class="settings-body">
+        <div class="settings-row">
+          <label class="settings-label">Theme</label>
+          <div class="toggle-group" id="theme-group">
+            <button data-theme="system" class="active">System</button>
+            <button data-theme="light">Light</button>
+            <button data-theme="dark">Dark</button>
+          </div>
+        </div>
+        <div class="settings-row">
+          <label class="settings-label">Palette</label>
+          <div class="palette-swatches" id="palette-group"></div>
+        </div>
+        <div class="settings-row">
+          <label class="settings-label">Font size</label>
+          <div class="toggle-group" id="font-group">
+            <button data-font="small">Small</button>
+            <button data-font="medium" class="active">Medium</button>
+            <button data-font="large">Large</button>
+          </div>
+        </div>
+        <div class="settings-row">
+          <button id="clear-history-btn">Clear all history</button>
+          <button id="reset-settings-btn">Reset all settings</button>
+        </div>
+        <div class="settings-row">
+          <label class="settings-label">Stored data</label>
+          <div class="settings-hint">Snippets, tokens, and ports are kept separately from input history.</div>
+          <button id="clear-data-btn" class="danger">Clear all stored data…</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Command palette modal -->
+  <div id="palette-modal" class="overlay" hidden>
+    <div class="palette-card" role="dialog" aria-label="Command palette">
+      <input id="palette-input" type="text" placeholder="Search tools…" autocomplete="off" />
+      <ul id="palette-list" role="listbox"></ul>
+    </div>
+  </div>
+
+  <!-- Keyboard shortcut cheatsheet -->
+  <div id="cheatsheet" class="overlay" hidden>
+    <div class="cheatsheet-card" role="dialog" aria-label="Keyboard shortcuts">
+      <div class="settings-header">
+        <span class="settings-title">Keyboard Shortcuts</span>
+        <button class="settings-close" id="cheatsheet-close" aria-label="Close">×</button>
+      </div>
+      <div class="cheatsheet-body">
+        <div class="shortcut-row"><kbd>/</kbd><span>Focus tool search</span></div>
+        <div class="shortcut-row"><kbd>⌘/Ctrl</kbd>+<kbd>K</kbd><span>Open command palette</span></div>
+        <div class="shortcut-row"><kbd>⌘/Ctrl</kbd>+<kbd>Enter</kbd><span>Copy output</span></div>
+        <div class="shortcut-row"><kbd>⌘/Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Backspace</kbd><span>Clear input</span></div>
+        <div class="shortcut-row"><kbd>⌘/Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd><span>Swap input/output</span></div>
+        <div class="shortcut-row"><kbd>Esc</kbd><span>Blur input (or close overlay)</span></div>
+        <div class="shortcut-row"><kbd>?</kbd><span>Toggle this help</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared utilities (must load before tools that use them) -->
+  <script src="tools/md5.js"></script>
+  <script src="tools/_jwt-util.js"></script>
+  <script src="tools/_find-util.js"></script>
+
+  <!-- Tool modules -->
+  <script src="tools/base64.js"></script>
+  <script src="tools/url.js"></script>
+  <script src="tools/html.js"></script>
+  <script src="tools/jwt.js"></script>
+  <script src="tools/hex.js"></script>
+  <script src="tools/unicode.js"></script>
+  <script src="tools/json.js"></script>
+  <script src="tools/hash.js"></script>
+  <script src="tools/uuid.js"></script>
+  <script src="tools/timestamp.js"></script>
+  <script src="tools/cron.js"></script>
+  <script src="tools/autodetect.js"></script>
+  <script src="tools/snippets.js"></script>
+  <script src="tools/tokens.js"></script>
+  <script src="tools/ports.js"></script>
+  <script src="tools/games.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

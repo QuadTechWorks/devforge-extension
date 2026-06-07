@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Local Claude Code settings (machine-specific)
+.claude/
+
+# Editor / OS cruft
+*.swp
+Thumbs.db
